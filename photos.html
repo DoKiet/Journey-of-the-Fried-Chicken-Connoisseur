@@ -7,6 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <style>
+      .photo-block {
+        text-align: right;
+        margin-bottom: 40px;
+      }
+      .photo-block img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+      }
+      .photo-block p {
+        margin-top: 5px;
+        font-size: 16px;
+      }
+      .desc {
+        text-align: center;
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body>
     <div class="nav-cont">
@@ -36,32 +55,32 @@
         </div>
       </navbar>
     </div>
-   
+
     <div class="photos-cont">
       <h1>Photos</h1>
       <hr color="#000000" width="100%" />
-      <!-- Image 1-->
-      <div style="text-align: right;">
-  <img
-  src="./photo/Young_Chicken.png"
-  width="300"
-  height="200"
-  style="object-fit: cover; position: absolute; top: 20px; right: 20px;"
-/>
-   <p>This photo is of The Rizzler</p>
-        </div>
+
+      <!-- Image 1 -->
+      <div class="photo-block">
+        <img src="./photo/Young_Chicken.png" />
+        <p>This photo is of The Rizzler</p>
       </div>
+
       <hr color="#000000" width="100%" />
+
       <!-- Image 2 -->
-      <div>
+      <div style="text-align: center;">
         <img
           src="https://www.shutterstock.com/image-photo/happy-asian-bald-man-suits-260nw-2416737005.jpg"
+          width="300"
         />
         <div class="desc">
           <p>This photo is of Happy Connoisseur</p>
         </div>
       </div>
+
       <hr color="#000000" width="100%" />
     </div>
   </body>
 </html>
+
