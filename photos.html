@@ -5,27 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Journey of the Fried Chicken Connoisseur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" href="main.css" />
     <script src="main.js"></script>
     <style>
-      .photo-block {
-        text-align: left;
-        margin-bottom: 40px;
+      .photo-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        padding: 20px;
       }
 
-      .left-img {
-        display: block;
-        margin: 0;
-        padding: 0;
+      .photo-block {
         width: 300px;
+      }
+
+      .photo-block img {
+        width: 100%;
         height: 200px;
         object-fit: cover;
+        display: block;
       }
 
-      .desc {
-        text-align: left;
+      .photo-block p {
+        margin-top: 8px;
         font-size: 16px;
-        margin-top: 5px;
+        text-align: left;
       }
     </style>
   </head>
@@ -48,10 +52,37 @@
       <h1>Photos</h1>
       <hr color="#000000" width="100%" />
 
-      <!-- Left-aligned image and caption -->
-      <div class="photo-block">
-        <img src="./photo/Young_Chicken.png" class="left-img" />
-        <p class="desc">This photo is of The Rizzler</p>
+      <!-- 🎯 Photo Grid -->
+      <div class="photo-gallery">
+        <div class="photo-block">
+          <img src="./photo/Young_Chicken.png" />
+          <p>This photo is of The Rizzler</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="./photo/Haircut1.png" />
+          <p>This photo is of Haircut Day 1</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="./photo/Haircut2.png" />
+          <p>This photo is of Haircut Day 2</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="./photo/Ocky.png" />
+          <p>This photo is of Ocky Enthusiast</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="./photo/Suspended.png" />
+          <p>This photo is of The Suspended Saga</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="./photo/Grab.png" />
+          <p>This photo is called The Grab</p>
+        </div>
       </div>
 
       <hr color="#000000" width="100%" />
