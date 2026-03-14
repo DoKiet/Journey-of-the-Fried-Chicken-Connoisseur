@@ -222,9 +222,9 @@ a {
 }
 
 body {
-  cursor: url("images/cursor.png"), auto;
+  cursor: url("images/Cursor.png"), auto;
 }
 
 .nav img:hover {
-  cursor: url("images/cursor-hover.png"), pointer;
+  cursor: url("images/Hover_Cursor.png"), pointer;
 }
