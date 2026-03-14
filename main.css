@@ -220,3 +220,11 @@ a {
   width: 125px;
   height: 200px;
 }
+
+body {
+  cursor: url("images/cursor.png"), auto;
+}
+
+.nav img:hover {
+  cursor: url("images/cursor-hover.png"), pointer;
+}
