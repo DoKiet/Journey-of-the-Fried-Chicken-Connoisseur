@@ -221,10 +221,10 @@ a {
   height: 200px;
 }
 
-body {
-  cursor: url("images/Cursor.png"), auto;
+* {
+  cursor: url("./images/Cursor.png"), auto;
 }
 
 .nav img:hover {
-  cursor: url("images/Hover_Cursor.png"), pointer;
+  cursor: url("./images/Hover_Cursor.png"), pointer;
 }
