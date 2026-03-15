@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Enter</title>
+  <title>Enter</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("images/Background_.png") center/contain no-repeat;
+      background-color: black;
+      overflow: hidden;
+      position: relative;
+    }
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  background:url("images/Background_.png") center/contain no-repeat;
-  background-color:black;
-  overflow:hidden;
-}
+    .splash {
+      width: 320px;
+      height: 420px;
+      background: url("images/Splash_Not_Burp.png") center/contain no-repeat;
+      position: absolute;
+      left: 50%;
+      top: 61%;
+      transform: translate(-50%, -50%);
+      display: block;
+    }
 
-.splash{
-  width:950px;
-  height:700px;
-
-  background:url("images/Splash_Not_Burp.png") center 70%/contain no-repeat;
-
-  position:absolute;
-  left:50%;
-  top:63%;
-  transform:translate(-50%,-50%);
-
-  display:block;
-}
-
-.splash:hover{
-  background:url("images/Splash_Burp.png") center 70%/contain no-repeat;
-}
-</style>
-
+    .splash:hover {
+      background: url("images/Splash_Burp.png") center/contain no-repeat;
+    }
+  </style>
 </head>
-
 <body>
-<a href="home.html" class="splash"></a>
+  <a href="home.html" class="splash"></a>
 </body>
 </html>
