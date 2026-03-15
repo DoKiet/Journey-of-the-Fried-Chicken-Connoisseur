@@ -2,8 +2,8 @@
 <html>
 <head>
 <title>Enter</title>
-<style>
 
+<style>
 body{
   margin:0;
   height:100vh;
@@ -13,24 +13,26 @@ body{
 }
 
 .splash{
-  width:320px;
-  height:420px;
+  width:260px;        /* smaller */
+  height:340px;
+
   background:url("images/Splash_Not_Burp.png") center/contain no-repeat;
 
   position:absolute;
   left:48%;
-  top:59%;
-  transform:translate(-50%,-50%);
+  top:55%;            /* moved up */
 
+  transform:translate(-50%,-50%);
   display:block;
 }
 
 .splash:hover{
   background:url("images/Splash_Burp.png") center/contain no-repeat;
 }
-
 </style>
+
 </head>
+
 <body>
 
 <a href="home.html" class="splash"></a>
