@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="nav-cont">
+      <navbar class="nav">
+        <div>
+          <a href="../index.html">
+            <img src="../images/Home.png" />
+          </a>
+          <a href="../archives.html">
+            <img class="archives" src="../images/Archives.png" />
+          </a>
+          <a href="../writing.html">
+            <img src="../images/Writing.png" />
+          </a>
+          <a href="../contact.html">
+            <img src="../images/Contact.png" />
+          </a>
+          <a href="../gallery.html">
+            <img class="characters" src="../images/Characters.png" />
+          </a>
+          <a href="../enemies.html">
+            <img src="../images/Enemies.png" />
+          </a>
+          <a href="../photos.html">
+            <img src="../images/Photos.png" />
+          </a>
+        </div>
+      </navbar>
+    </div>
+
+    <div class="writing-file-container">
+      <div class="writing-div">
+        <h1>Chicken Connoisseur Verse - Updated June 2025</h1>
+        <div>
+          <p>
+           I had a fascinating talk with my co-worker (Justin Zhou) recently, and, well, initially, I didn't think
+ this was worth noting down yet, but I am. I will be introducing the most powerful being in the C.C verse
+ At the very top is Ginatam; nothing can beat this classic. I collected the whole manga series. My phone background
+ is Gintama, and I have a lighter holder inspired by Gintama. I believe I'm the biggest Gintama fan writing this down
+ I should buy a wooden katana to honor the Gintama verse.
+
+          </p>
+
+          <p>
+           The second is Conan O Brien. As you can tell from the front page, it has contributed a lot to making this website
+ He also taught me a lot about comedy and how to become a nice person, even though it can be very tough at times.
+ I never understood why my friend cried when Juice Wrld Died or when One Direction Split apart, but thinking of 
+ The inevitable end to Conan's life made me tear up a bit. I don't think we will get another Conan O'Brien in 
+ One hundred years, I don't think we can get another ever. That man is the only ginger that has a soul. You see his influence
+ in my humor and self-deprecation.
+
+          </p>
+
+          <p>
+           
+ If Gintama was the Earth and Conan O' Brien was Heaven, then The Ethicist of the New York Times 
+ written by Kwame Anthony Appiah would by the light. You can see its clear influence on my writing style. I seek to 
+ write about mundane things and make them lively and interesting. Also, it taught me so much about how to handle
+ social situations and was a great read when bored. I hate reading books. They take too long to get to the point, but The 
+ Ethics is a great read that teaches the same lesson and gives you the same situation as you can find in books.
+            
+          </p>
+
+          <p>
+            I found Tim Kreider in my college writing class. Where he wrote that it was a flex to not have to work. Yes 
+ you might be saying, but Kevin, that's common sense. NOT BACK THEN, everyone was saying things like I have a job and shit
+ acting all important. BEING UNEMPLOYED HAS ITS OWN PERKS!! Kreider was truly ahead of his time, and he introduced me to
+ Caricatures, since I have always wanted to be able to draw political cartoons.
+          </p>
+
+          <p>
+            Disclaimer : This was a very card counting moment in my life so you can ignore this.
+      Norm Wattenberg,Don Schlesinger,Stanford Wong. I put these three in the same rank since they were the ones that 
+ introduced and helped me learn card counting, which is a great hobby of mine. As if writing this right now, I am 20
+ I cannot hit up any casinos near me yet, but once I turn 21, trust me, I'm gonna be hitting the casinos every single
+ week.
+</p>
+
+          <p>-C.C</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
