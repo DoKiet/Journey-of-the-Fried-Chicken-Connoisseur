@@ -25,6 +25,7 @@ hr {
   border-top: 1px solid black;
   width: 100%;
   margin: 20px 0;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -35,6 +36,11 @@ hr {
   display: flex;
   justify-content: center;
   padding: 16px 0 8px 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 100%;
 }
 
 .nav > div {
@@ -43,6 +49,8 @@ hr {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .nav img {
@@ -95,6 +103,7 @@ hr {
   text-align: center;
   line-height: 1.45;
   font-size: 1.1rem;
+  font-weight: normal;
 }
 
 .main {
@@ -132,6 +141,7 @@ hr {
   gap: 40px;
   flex-wrap: wrap;
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .book-img {
@@ -139,6 +149,12 @@ hr {
   flex-direction: column;
   align-items: center;
   max-width: 320px;
+}
+
+.book-title-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .book-title {
@@ -150,6 +166,11 @@ hr {
   max-width: 300px;
 }
 
+.book1 {
+  width: 300px;
+  height: auto;
+}
+
 .book-text {
   max-width: 560px;
 }
@@ -159,18 +180,35 @@ hr {
 }
 
 /* =========================
-   ARCHIVES / LIST PAGES
+   ARCHIVES / WRITING LIST PAGES
 ========================= */
 .archive-div,
 .writing-div {
   width: 80%;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .archive-div ul,
 .writing-div ul {
   text-align: left;
   padding-left: 20px;
+}
+
+.archive-file-container,
+.writing-file-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.archive-file-container img {
+  margin: 0 auto;
+}
+
+.writing-file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* =========================
@@ -183,16 +221,19 @@ hr {
 }
 
 .story-content {
+  width: 100%;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .story-title {
+  width: 100%;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0 0 30px 0;
 }
 
 .story-image-wrap {
@@ -209,6 +250,7 @@ hr {
 }
 
 .story-text {
+  width: 100%;
   max-width: 800px;
 }
 
@@ -237,22 +279,32 @@ hr {
   width: 80%;
 }
 
-.characters-c {
+.enemies-title {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.chars-cont {
-  width: 100%;
-  max-width: 1100px;
+.characters-c {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* CHARACTER GRID - FIXED */
+.chars-cont {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 200px;
+}
+
+/* ONLY CHARACTER GRID CHANGED */
 .chars {
   width: 100%;
-  max-width: 1100px;
+  max-width: 900px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -272,10 +324,6 @@ hr {
   box-sizing: border-box;
 }
 
-.characters-c img {
-  height: 200px;
-}
-
 .chars img {
   width: 180px;
   height: auto;
@@ -284,6 +332,39 @@ hr {
 .enemies-portrait {
   width: 125px;
   height: 200px;
+  object-fit: cover;
+}
+
+/* =========================
+   CONTACT / PHOTOS
+========================= */
+.desc {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.char-data {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* =========================
+   OTHER IMAGE SECTIONS
+========================= */
+.img-cont {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.img-cont img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
 }
 
 /* =========================
@@ -294,9 +375,14 @@ hr {
     height: 42px;
   }
 
+  .nav > div {
+    gap: 12px;
+  }
+
   .img-cont-main .title {
     width: 90%;
     max-width: 520px;
+    min-width: 0;
   }
 
   .story-image {
@@ -315,5 +401,13 @@ hr {
 
   .chars img {
     width: 140px;
+  }
+
+  .archive-div,
+  .writing-div,
+  .enemies,
+  .chars-cont,
+  .characters-c {
+    width: 92%;
   }
 }
