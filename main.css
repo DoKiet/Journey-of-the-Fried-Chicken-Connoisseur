@@ -89,7 +89,6 @@ body {
   width: 100%;
 }
 
-/* works for ALL navbar images */
 .nav img {
   height: 50px;
   width: 100px;
@@ -194,10 +193,16 @@ a {
 }
 
 .writing-div {
-  width: 50%;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin-left: 100px;
+}
+
+.writing-div ul {
+  text-align: left;
+  padding-left: 20px;
 }
 
 .archive-file-container {
