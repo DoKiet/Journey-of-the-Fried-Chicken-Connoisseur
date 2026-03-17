@@ -25,6 +25,7 @@ hr {
   border-top: 1px solid black;
   width: 100%;
   margin: 20px 0;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -35,23 +36,33 @@ hr {
   display: flex;
   justify-content: center;
   padding: 16px 0 8px 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 100%;
 }
 
 .nav > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 20px;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .nav img {
   height: 56px;
+  width: auto;
 }
 
 /* =========================
    GENERAL LAYOUT
 ========================= */
 .container {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -63,6 +74,7 @@ hr {
   flex-direction: column;
   align-items: center;
   padding: 0 20px 40px 20px;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -88,12 +100,12 @@ hr {
   margin: 0 auto;
 }
 
-/* TEXT */
 .sub-container > h3 {
   max-width: 900px;
   text-align: center;
   font-size: 1.1rem;
   font-weight: normal;
+  line-height: 1.45;
 }
 
 .main {
@@ -105,17 +117,25 @@ hr {
    BOOKS
 ========================= */
 .books {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.books > h3 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .book-cont {
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .book-img {
@@ -124,8 +144,15 @@ hr {
   align-items: center;
 }
 
+.book-title-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .book-title {
   text-align: center;
+  margin-bottom: 12px;
 }
 
 .book-cont img {
@@ -136,13 +163,19 @@ hr {
   max-width: 560px;
 }
 
+.book-text p {
+  line-height: 1.6;
+}
+
 /* =========================
    ARCHIVES / WRITING
 ========================= */
 .archive-div,
 .writing-div {
   width: 80%;
+  max-width: 900px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .archive-div ul,
@@ -151,25 +184,40 @@ hr {
   padding-left: 20px;
 }
 
+.archive-file-container,
+.writing-file-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .archive-file-container img {
   display: block;
   margin: 0 auto;
+}
+
+.writing-file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* =========================
    STORY PAGE
 ========================= */
 .story-page {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .story-content {
+  width: 100%;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .story-page .story-title {
@@ -182,21 +230,26 @@ hr {
 }
 
 .story-image-wrap {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .story-image {
+  width: 100%;
   max-width: 500px;
+  height: auto;
 }
 
 .story-text {
+  width: 100%;
   max-width: 800px;
 }
 
 .story-text h4 {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .story-text p {
@@ -204,8 +257,63 @@ hr {
 }
 
 /* =========================
+   CONTACT / ENEMIES / PHOTOS
+========================= */
+.contact,
+.enemies-cont,
+.photos-cont {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 40px 20px;
+  box-sizing: border-box;
+}
+
+.contact h1,
+.enemies-cont h1,
+.photos-cont h1 {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.contact p,
+.enemies-cont p,
+.photos-cont p,
+.contact li,
+.enemies-cont li,
+.photos-cont li {
+  line-height: 1.6;
+}
+
+.enemies {
+  width: 100%;
+}
+
+.enemies-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desc {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* =========================
    CHARACTERS
 ========================= */
+.characters-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .characters-c {
   width: 60%;
   display: flex;
@@ -215,13 +323,20 @@ hr {
 
 .chars-cont {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 200px;
 }
 
 .chars {
+  width: 100%;
+  max-width: 900px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  padding: 0;
+  box-sizing: border-box;
   border: none;
 }
 
@@ -231,23 +346,42 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   min-height: 220px;
+  box-sizing: border-box;
 }
 
 .chars img {
   width: 180px;
+  height: auto;
+}
+
+.char-data {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 /* =========================
-   OTHER
+   OTHER IMAGES
 ========================= */
-.enemies {
-  width: 80%;
+.img-cont {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.img-cont img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
 }
 
 .enemies-portrait {
   width: 125px;
   height: 200px;
+  object-fit: cover;
 }
 
 /* =========================
@@ -258,16 +392,45 @@ hr {
     height: 42px;
   }
 
+  .nav > div {
+    gap: 12px;
+  }
+
   .img-cont-main .title {
     width: 82%;
     max-width: 460px;
   }
 
+  .story-page .story-title {
+    font-size: 1.8rem;
+  }
+
+  .story-image {
+    max-width: 90%;
+  }
+
   .chars {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .chars div {
+    min-height: 180px;
+    padding: 12px;
   }
 
   .chars img {
     width: 140px;
+  }
+
+  .archive-div,
+  .writing-div,
+  .contact,
+  .enemies-cont,
+  .photos-cont,
+  .chars-cont,
+  .characters-c {
+    width: 92%;
+    max-width: none;
   }
 }
