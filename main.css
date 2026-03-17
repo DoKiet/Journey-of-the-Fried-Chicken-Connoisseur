@@ -207,15 +207,11 @@ a {
 
 .archive-file-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .archive-file-container img {
   display: block;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .writing-file-container {
