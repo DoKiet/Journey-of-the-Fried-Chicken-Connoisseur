@@ -179,11 +179,12 @@ a {
   justify-content: center;
 }
 
+/* ✅ FIXED ARCHIVE SECTION */
 .archive-div {
   width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* fixes centering */
+  align-items: flex-start;
   margin-left: 100px;
 }
 
@@ -191,8 +192,8 @@ a {
   text-align: left;
   padding-left: 20px;
 }
-}
 
+/* writing still centered (unchanged) */
 .writing-div {
   width: 50%;
   display: flex;
@@ -223,8 +224,8 @@ a {
   width: 300px;
   height: 600px;
 }
+
 .enemies-portrait {
   width: 125px;
   height: 200px;
 }
-
