@@ -3,6 +3,7 @@ body {
   color: black;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 .container {
@@ -90,13 +91,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: white;
   align-items: center;
-}
-
-.nav div .archive-img {
-  height: 100%;
-  width: 100%;
+  background-color: white;
 }
 
 .nav img {
@@ -106,19 +102,26 @@ body {
 }
 
 .nav-cont {
-  display: flex;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.nav-cont > .nav > div {
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .archives {
-  margin-right: 20px;
+  margin-right: 0;
 }
 
 .characters {
-  margin-right: 10px;
+  margin-right: 0;
 }
 
 a {
@@ -201,11 +204,14 @@ a {
 /* ARCHIVE / WRITING LISTS */
 .archive-div,
 .writing-div {
-  width: 80%;
+  width: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-left: 0;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .archive-div ul,
@@ -218,12 +224,14 @@ a {
 .archive-file-container,
 .writing-file-container {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .archive-file-container img {
   display: block;
-  margin: 0 auto;
-  max-width: 90%;
+  margin: 20px auto;
+  max-width: 100%;
   height: auto;
 }
 
@@ -231,6 +239,27 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* CENTER STORY PAGE CONTENT */
+.archive-div h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.archive-div h4 {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.archive-div p {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  line-height: 1.6;
 }
 
 /* MISC */
