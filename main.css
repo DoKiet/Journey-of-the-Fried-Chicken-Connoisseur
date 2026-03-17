@@ -89,7 +89,8 @@ body {
   width: 100%;
 }
 
-.nav div img {
+/* works for ALL navbar images */
+.nav img {
   height: 50px;
   width: 100px;
 }
@@ -179,7 +180,6 @@ a {
   justify-content: center;
 }
 
-/* ✅ FIXED ARCHIVE SECTION */
 .archive-div {
   width: 80%;
   display: flex;
@@ -193,7 +193,6 @@ a {
   padding-left: 20px;
 }
 
-/* writing still centered (unchanged) */
 .writing-div {
   width: 50%;
   display: flex;
