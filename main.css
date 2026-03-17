@@ -183,7 +183,14 @@ a {
   width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* fixes centering */
+  margin-left: 100px;
+}
+
+.archive-div ul {
+  text-align: left;
+  padding-left: 20px;
+}
 }
 
 .writing-div {
