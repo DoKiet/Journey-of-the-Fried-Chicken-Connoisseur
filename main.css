@@ -1,184 +1,22 @@
-/* =====================
-   GLOBAL
-===================== */
-body {
-  background-color: white;
-  color: black;
-  margin: 0;
-  padding: 0;
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* =====================
-   NAV
-===================== */
-.nav-cont {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 20px 0 10px 0;
-}
-
-.nav > div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-}
-
-.nav img {
-  height: 60px;
-  width: auto;
-  display: block;
-}
-
-/* =====================
-   MAIN WRAPPER
-===================== */
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.sub-container {
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 20px 40px 20px;
-  box-sizing: border-box;
-}
-
-/* =====================
-   TITLE (THIS IS YOUR FIX)
-===================== */
 .img-cont-main {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 10px 0 20px 0;
+}
+
+.img-cont-main a {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .title {
-  width: 60%;         /* 🔥 main control */
-  max-width: 650px;   /* 🔥 cap size */
-  height: auto;
   display: block;
-}
-
-/* =====================
-   INTRO TEXT
-===================== */
-.sub-container > h3 {
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  line-height: 1.4;
-  font-size: 1.1rem;
-  margin: 10px 0 20px 0;
-}
-
-/* =====================
-   MAIN IMAGE
-===================== */
-.main {
-  width: 100%;
-  max-width: 750px;
+  width: 60%;
+  max-width: 650px;
+  min-width: 320px;
   height: auto;
-  display: block;
-  margin: 20px 0;
-}
-
-/* =====================
-   ARTIST STATEMENT
-===================== */
-.sub-container > div:not(.img-cont-main):not(.books) {
-  width: 100%;
-  max-width: 900px;
-}
-
-.sub-container > div:not(.img-cont-main):not(.books) h4 {
-  margin-bottom: 10px;
-}
-
-.sub-container > div:not(.img-cont-main):not(.books) p {
-  line-height: 1.6;
-}
-
-/* =====================
-   BOOKS SECTION
-===================== */
-.books {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.books > h3 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.book-cont {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.book-img {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 320px;
-}
-
-.book-title {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.book-cont img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-}
-
-.book1 {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-}
-
-.book-text {
-  flex: 1;
-  min-width: 280px;
-  max-width: 550px;
-}
-
-.book-text p {
-  line-height: 1.6;
-  margin-top: 0;
-}
-
-/* =====================
-   HR
-===================== */
-hr {
-  border: none;
-  border-top: 1px solid black;
-  width: 100%;
-  margin: 20px 0;
+  margin: 0 auto;
 }
