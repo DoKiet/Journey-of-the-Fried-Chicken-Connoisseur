@@ -1,3 +1,6 @@
+/* =====================
+   GLOBAL
+===================== */
 body {
   background-color: white;
   color: black;
@@ -11,16 +14,14 @@ a {
   color: inherit;
 }
 
-/* NAV */
+/* =====================
+   NAV
+===================== */
 .nav-cont {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 20px 0 10px 0;
-}
-
-.nav {
-  width: 100%;
 }
 
 .nav > div {
@@ -37,7 +38,9 @@ a {
   display: block;
 }
 
-/* MAIN PAGE WRAPPER */
+/* =====================
+   MAIN WRAPPER
+===================== */
 .container {
   width: 100%;
   display: flex;
@@ -54,7 +57,9 @@ a {
   box-sizing: border-box;
 }
 
-/* TITLE IMAGE */
+/* =====================
+   TITLE (THIS IS YOUR FIX)
+===================== */
 .img-cont-main {
   width: 100%;
   display: flex;
@@ -63,48 +68,54 @@ a {
 }
 
 .title {
-  width: 100%;
-  max-width: 850px;
+  width: 60%;         /* 🔥 main control */
+  max-width: 650px;   /* 🔥 cap size */
   height: auto;
   display: block;
 }
 
-/* INTRO TEXT */
+/* =====================
+   INTRO TEXT
+===================== */
 .sub-container > h3 {
   width: 100%;
-  max-width: 1250px;
+  max-width: 900px;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.4;
   font-size: 1.1rem;
   margin: 10px 0 20px 0;
 }
 
-/* WELCOME IMAGE */
+/* =====================
+   MAIN IMAGE
+===================== */
 .main {
   width: 100%;
-  max-width: 850px;
+  max-width: 750px;
   height: auto;
   display: block;
   margin: 20px 0;
 }
 
-/* ARTIST STATEMENT */
+/* =====================
+   ARTIST STATEMENT
+===================== */
 .sub-container > div:not(.img-cont-main):not(.books) {
   width: 100%;
-  max-width: 1250px;
+  max-width: 900px;
 }
 
 .sub-container > div:not(.img-cont-main):not(.books) h4 {
-  text-align: left;
   margin-bottom: 10px;
 }
 
 .sub-container > div:not(.img-cont-main):not(.books) p {
-  line-height: 1.5;
-  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/* BOOKS SECTION */
+/* =====================
+   BOOKS SECTION
+===================== */
 .books {
   width: 100%;
   display: flex;
@@ -131,37 +142,30 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 350px;
-}
-
-.book-title-cont {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  max-width: 320px;
 }
 
 .book-title {
   text-align: center;
-  margin: 0 0 15px 0;
+  margin-bottom: 10px;
 }
 
 .book-cont img {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   height: auto;
-  display: block;
 }
 
 .book1 {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   height: auto;
 }
 
 .book-text {
   flex: 1;
   min-width: 280px;
-  max-width: 600px;
+  max-width: 550px;
 }
 
 .book-text p {
@@ -169,7 +173,9 @@ a {
   margin-top: 0;
 }
 
-/* HR */
+/* =====================
+   HR
+===================== */
 hr {
   border: none;
   border-top: 1px solid black;
