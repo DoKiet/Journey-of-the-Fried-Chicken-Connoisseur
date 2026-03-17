@@ -25,7 +25,6 @@ hr {
   border-top: 1px solid black;
   width: 100%;
   margin: 20px 0;
-  box-sizing: border-box;
 }
 
 /* =========================
@@ -36,33 +35,23 @@ hr {
   display: flex;
   justify-content: center;
   padding: 16px 0 8px 0;
-  box-sizing: border-box;
-}
-
-.nav {
-  width: 100%;
 }
 
 .nav > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   gap: 20px;
-  padding: 0 12px;
-  box-sizing: border-box;
 }
 
 .nav img {
   height: 56px;
-  width: auto;
 }
 
 /* =========================
    GENERAL LAYOUT
 ========================= */
 .container {
-  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -74,7 +63,6 @@ hr {
   flex-direction: column;
   align-items: center;
   padding: 0 20px 40px 20px;
-  box-sizing: border-box;
 }
 
 .title {
@@ -85,7 +73,6 @@ hr {
    HOMEPAGE
 ========================= */
 .img-cont-main {
-  width: 100%;
   display: flex;
   justify-content: center;
   margin: 12px 0 20px 0;
@@ -94,14 +81,11 @@ hr {
 .img-cont-main .title {
   width: 60%;
   max-width: 650px;
-  min-width: 280px;
-  margin: 0 auto;
 }
 
 .sub-container > h3 {
   max-width: 900px;
   text-align: center;
-  line-height: 1.45;
   font-size: 1.1rem;
   font-weight: normal;
 }
@@ -111,153 +95,97 @@ hr {
   margin: 20px auto;
 }
 
-.sub-container > div:not(.img-cont-main):not(.books) {
-  max-width: 900px;
-}
-
-.sub-container > div:not(.img-cont-main):not(.books) p {
-  line-height: 1.6;
-}
-
 /* =========================
    BOOKS
 ========================= */
 .books {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.books > h3 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
 .book-cont {
-  width: 100%;
   display: flex;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
   margin-bottom: 30px;
-  box-sizing: border-box;
 }
 
 .book-img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 320px;
-}
-
-.book-title-cont {
-  width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .book-title {
   text-align: center;
-  margin-bottom: 12px;
 }
 
 .book-cont img {
   max-width: 300px;
 }
 
-.book1 {
-  width: 300px;
-  height: auto;
-}
-
 .book-text {
   max-width: 560px;
 }
 
-.book-text p {
-  line-height: 1.6;
-}
-
 /* =========================
-   ARCHIVES / WRITING LIST PAGES
+   ARCHIVES / WRITING
 ========================= */
 .archive-div,
 .writing-div {
   width: 80%;
   margin: 0 auto;
-  box-sizing: border-box;
 }
 
 .archive-div ul,
 .writing-div ul {
   text-align: left;
-  padding-left: 20px;
-}
-
-.archive-file-container,
-.writing-file-container {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.archive-file-container img {
-  margin: 0 auto;
-}
-
-.writing-file-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* =========================
    STORY PAGE
 ========================= */
 .story-page {
-  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .story-content {
-  width: 100%;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* ONLY centers story page headings */
+/* ✅ FIXED TITLE */
 .story-page .story-title {
   width: 100%;
-  text-align: center;
+  max-width: 900px;
   margin: 0 auto 30px auto;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
 .story-image-wrap {
-  width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .story-image {
-  width: 100%;
   max-width: 500px;
-  height: auto;
 }
 
 .story-text {
-  width: 100%;
   max-width: 800px;
 }
 
 .story-text h4 {
   text-align: center;
-  margin-bottom: 15px;
 }
 
 .story-text p {
@@ -265,28 +193,8 @@ hr {
 }
 
 /* =========================
-   ENEMIES / CHARACTERS
+   CHARACTERS
 ========================= */
-.enemies-cont,
-.characters-cont,
-.photos-cont,
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.enemies {
-  width: 80%;
-}
-
-.enemies-title {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .characters-c {
   width: 60%;
   display: flex;
@@ -296,21 +204,15 @@ hr {
 
 .chars-cont {
   width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-bottom: 200px;
 }
 
+/* ✅ FIXED GRID */
 .chars {
-  width: 100%;
-  max-width: 900px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
+  border: none; /* removes big outer box */
 }
 
 .chars div {
@@ -319,52 +221,23 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
   min-height: 220px;
-  box-sizing: border-box;
 }
 
 .chars img {
   width: 180px;
-  height: auto;
+}
+
+/* =========================
+   OTHER
+========================= */
+.enemies {
+  width: 80%;
 }
 
 .enemies-portrait {
   width: 125px;
   height: 200px;
-  object-fit: cover;
-}
-
-/* =========================
-   CONTACT / PHOTOS
-========================= */
-.desc {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-}
-
-.char-data {
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-/* =========================
-   OTHER IMAGE SECTIONS
-========================= */
-.img-cont {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.img-cont img {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
 }
 
 /* =========================
@@ -375,39 +248,15 @@ hr {
     height: 42px;
   }
 
-  .nav > div {
-    gap: 12px;
-  }
-
   .img-cont-main .title {
     width: 90%;
-    max-width: 520px;
-    min-width: 0;
-  }
-
-  .story-image {
-    max-width: 90%;
   }
 
   .chars {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .chars div {
-    min-height: 180px;
-    padding: 12px;
   }
 
   .chars img {
     width: 140px;
-  }
-
-  .archive-div,
-  .writing-div,
-  .enemies,
-  .chars-cont,
-  .characters-c {
-    width: 92%;
   }
 }
