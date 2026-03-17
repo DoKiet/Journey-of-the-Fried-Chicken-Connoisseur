@@ -201,10 +201,9 @@ hr {
   margin-bottom: 20px;
 }
 
-/* 🔥 THIS IS YOUR FIX */
 .story-image {
   width: 100%;
-  max-width: 500px;   /* ← controls image size */
+  max-width: 500px;
   height: auto;
 }
 
@@ -248,13 +247,34 @@ hr {
   width: 80%;
 }
 
+/* FIXED CHARACTER BOXES */
+.chars {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.chars div {
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
 .characters-c img {
   height: 200px;
 }
 
-.chars {
-  border: 1px solid black;
-  width: 100%;
+.chars img {
+  width: 120px;
+  height: auto;
 }
 
 .enemies-portrait {
@@ -277,5 +297,9 @@ hr {
 
   .story-image {
     max-width: 90%;
+  }
+
+  .chars {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
