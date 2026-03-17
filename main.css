@@ -66,13 +66,13 @@ hr {
 }
 
 /* =========================
-   HOMEPAGE (FIXED TITLE)
+   HOMEPAGE
 ========================= */
 .img-cont-main {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; /* 🔥 added */
+  align-items: center;
   margin: 12px 0 20px 0;
 }
 
@@ -83,9 +83,9 @@ hr {
 }
 
 .img-cont-main .title {
-  width: 60%;
-  max-width: 650px;
-  margin: 0 auto; /* 🔥 forces true center */
+  width: 48%;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 /* TEXT */
@@ -181,8 +181,26 @@ hr {
   line-height: 1.2;
 }
 
+.story-image-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .story-image {
   max-width: 500px;
+}
+
+.story-text {
+  max-width: 800px;
+}
+
+.story-text h4 {
+  text-align: center;
+}
+
+.story-text p {
+  line-height: 1.6;
 }
 
 /* =========================
@@ -221,6 +239,18 @@ hr {
 }
 
 /* =========================
+   OTHER
+========================= */
+.enemies {
+  width: 80%;
+}
+
+.enemies-portrait {
+  width: 125px;
+  height: 200px;
+}
+
+/* =========================
    MOBILE
 ========================= */
 @media (max-width: 700px) {
@@ -229,7 +259,8 @@ hr {
   }
 
   .img-cont-main .title {
-    width: 90%;
+    width: 82%;
+    max-width: 460px;
   }
 
   .chars {
