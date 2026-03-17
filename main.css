@@ -1,49 +1,261 @@
-/* ONLY FOR INDIVIDUAL ARCHIVE STORY PAGES */
+/* =====================
+   GLOBAL
+===================== */
+body {
+  background-color: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =====================
+   NAVIGATION
+===================== */
+.nav-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.nav > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  max-width: 1000px;
+}
+
+/* NAV IMAGES */
+.nav img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: 0.2s;
+}
+
+.nav img:hover {
+  transform: scale(1.05);
+}
+
+/* =====================
+   GENERAL CONTAINERS
+===================== */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =====================
+   TITLES
+===================== */
+.title {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* =====================
+   IMAGE CONTAINERS
+===================== */
+.img-cont,
+.img-cont-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.img-cont img,
+.img-cont-main img {
+  max-width: 90%;
+  height: auto;
+  display: block;
+}
+
+/* =====================
+   ARCHIVES PAGE (LIST)
+===================== */
+.archive-div {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.archive-div ul {
+  text-align: left;
+  padding-left: 20px;
+}
+
+/* =====================
+   STORY PAGE (ISOLATED)
+===================== */
 .story-page {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.story-page .story-content {
+.story-content {
   width: 100%;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-.story-page .story-title {
-  width: 100%;
+.story-title {
   text-align: center;
   margin-bottom: 30px;
 }
 
-.story-page .story-image-wrap {
+.story-image-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.story-page .story-image {
-  display: block;
+.story-image {
   max-width: 100%;
   height: auto;
 }
 
-.story-page .story-text {
-  width: 100%;
+.story-text {
   max-width: 800px;
 }
 
-.story-page .story-text h4 {
+.story-text h4 {
   text-align: center;
   margin-bottom: 15px;
 }
 
-.story-page .story-text p {
+.story-text p {
   line-height: 1.6;
+}
+
+/* =====================
+   BOOKS / OTHER SECTIONS
+===================== */
+.books {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-cont {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.book-cont img {
+  height: 500px;
+  max-width: 100%;
+}
+
+.book-text {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.book-title-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.book-title {
+  margin: 10px;
+  text-align: center;
+}
+
+/* =====================
+   CHARACTERS / ENEMIES
+===================== */
+.characters-cont,
+.enemies-cont,
+.photos-cont,
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.characters-c {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chars-cont {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.characters-c img {
+  height: 200px;
+  max-width: 100%;
+}
+
+.chars {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.chars div {
+  margin: 10px;
+}
+
+.enemies {
+  width: 80%;
+}
+
+.enemies-portrait {
+  width: 125px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* =====================
+   MISC
+===================== */
+.desc {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.char-data {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+}
+
+.book1 {
+  width: 300px;
+  height: 600px;
+  object-fit: cover;
 }
