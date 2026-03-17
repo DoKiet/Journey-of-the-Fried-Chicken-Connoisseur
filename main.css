@@ -1,6 +1,8 @@
 body {
   background-color: white;
   color: black;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -10,43 +12,44 @@ body {
 }
 
 .sub-container {
+  width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 50%;
+  align-items: center;
 }
 
-.img-cont {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-.img-cont img {
-  height: 200px;
-  width: 450px;
-}
-
-.img-cont-main {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-.img-cont-main img {
-  height: 200px;
-  width: 450px;
-}
-
+/* TITLES */
 .title {
-  width: 20%;
-  padding: 10px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 0 30px 0;
 }
 
+/* IMAGE CONTAINERS */
+.img-cont,
+.img-cont-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.img-cont img,
+.img-cont-main img {
+  display: block;
+  max-width: 90%;
+  height: auto;
+}
+
+/* BOOK SECTION */
 .books {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .book-cont {
@@ -54,11 +57,15 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .book-cont img {
   height: 500px;
   margin: 10px;
+  max-width: 100%;
 }
 
 .book-text {
@@ -70,12 +77,15 @@ body {
 .book-title-cont {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .book-title {
   margin: 10px;
+  text-align: center;
 }
 
+/* NAV */
 .nav {
   width: 100%;
   display: flex;
@@ -92,12 +102,15 @@ body {
 .nav img {
   height: 50px;
   width: 100px;
+  object-fit: contain;
 }
 
 .nav-cont {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .archives {
@@ -110,12 +123,15 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
+/* ENEMIES */
 .enemies-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .enemies {
@@ -129,10 +145,12 @@ a {
   align-items: center;
 }
 
+/* CHARACTERS */
 .characters-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .characters-c {
@@ -152,86 +170,85 @@ a {
 
 .characters-c img {
   height: 200px;
+  max-width: 100%;
 }
 
 .chars {
   border: 1px solid black;
+  width: 100%;
 }
 
 .chars div {
   margin: 10px;
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* CONTACT / PHOTOS */
+.contact,
 .photos-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .desc {
   display: flex;
   justify-content: center;
+  width: 100%;
+  text-align: center;
 }
 
-.archive-div {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 100px;
-}
-
-.archive-div ul {
-  text-align: left;
-  padding-left: 20px;
-}
-
+/* ARCHIVE / WRITING LISTS */
+.archive-div,
 .writing-div {
   width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 100px;
+  margin-left: 0;
 }
 
+.archive-div ul,
 .writing-div ul {
   text-align: left;
   padding-left: 20px;
 }
 
-.archive-file-container {
+/* FILE CONTAINERS */
+.archive-file-container,
+.writing-file-container {
   width: 100%;
 }
 
 .archive-file-container img {
   display: block;
   margin: 0 auto;
+  max-width: 90%;
+  height: auto;
 }
 
 .writing-file-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* MISC */
 .char-data {
   display: flex;
   flex-direction: row-reverse;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 .book1 {
   width: 300px;
   height: 600px;
+  object-fit: cover;
 }
 
 .enemies-portrait {
   width: 125px;
   height: 200px;
+  object-fit: cover;
 }
