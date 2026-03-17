@@ -1,9 +1,96 @@
+/* =========================
+   GLOBAL
+========================= */
+body {
+  background-color: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid black;
+  width: 100%;
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   NAV
+========================= */
+.nav-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 8px 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 100%;
+}
+
+.nav > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.nav img {
+  height: 56px;
+  width: auto;
+}
+
+/* =========================
+   GENERAL LAYOUT
+========================= */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 40px 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+}
+
+/* =========================
+   HOMEPAGE
+========================= */
 .img-cont-main {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0 20px 0;
+  margin: 12px 0 20px 0;
+  text-align: center;
 }
 
 .img-cont-main a {
@@ -12,11 +99,345 @@
   width: 100%;
 }
 
-.title {
-  display: block;
+/* IMPORTANT: only homepage title image */
+.img-cont-main .title {
   width: 60%;
   max-width: 650px;
-  min-width: 320px;
+  min-width: 280px;
   height: auto;
   margin: 0 auto;
+}
+
+.sub-container > h3 {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  line-height: 1.45;
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: 8px 0 20px 0;
+}
+
+.main {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.sub-container > div:not(.img-cont-main):not(.books) {
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+}
+
+.sub-container > div:not(.img-cont-main):not(.books) h4 {
+  margin: 0 0 10px 0;
+}
+
+.sub-container > div:not(.img-cont-main):not(.books) p {
+  line-height: 1.6;
+  margin: 0 0 14px 0;
+}
+
+/* =========================
+   BOOKS SECTION
+========================= */
+.books {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.books > h3 {
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.book-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.book-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 320px;
+}
+
+.book-title-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.book-title {
+  text-align: center;
+  margin: 0 0 12px 0;
+}
+
+.book-cont img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.book1 {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.book-text {
+  flex: 1;
+  min-width: 280px;
+  max-width: 560px;
+}
+
+.book-text p {
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================
+   ARCHIVES / WRITING LIST PAGES
+========================= */
+.archive-div,
+.writing-div {
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.archive-div ul,
+.writing-div ul {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.archive-file-container,
+.writing-file-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.archive-file-container img {
+  margin: 0 auto;
+}
+
+.writing-file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =========================
+   STORY PAGE
+========================= */
+.story-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.story-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.story-title {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.story-image-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.story-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.story-text {
+  width: 100%;
+  max-width: 800px;
+}
+
+.story-text h4 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.story-text p {
+  line-height: 1.6;
+}
+
+/* =========================
+   ENEMIES
+========================= */
+.enemies-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enemies {
+  width: 80%;
+}
+
+.enemies-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enemies-portrait {
+  width: 125px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* =========================
+   CHARACTERS
+========================= */
+.characters-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.characters-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
+
+.chars-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 200px;
+}
+
+.characters-c img {
+  height: 200px;
+  width: auto;
+}
+
+.chars {
+  border: 1px solid black;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chars div {
+  margin: 10px;
+}
+
+.char-data {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* =========================
+   CONTACT / PHOTOS
+========================= */
+.contact,
+.photos-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desc {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* =========================
+   MISC IMAGE SECTIONS
+========================= */
+.img-cont {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.img-cont img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+}
+
+.book-title-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.book-title {
+  margin: 10px;
+}
+
+.book1 {
+  width: 300px;
+  height: auto;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 700px) {
+  .nav img {
+    height: 42px;
+  }
+
+  .nav > div {
+    gap: 12px;
+  }
+
+  .img-cont-main .title {
+    width: 90%;
+    max-width: 520px;
+    min-width: 0;
+  }
+
+  .sub-container > h3 {
+    font-size: 1rem;
+  }
+
+  .book-cont {
+    gap: 20px;
+  }
+
+  .archive-div,
+  .writing-div,
+  .enemies,
+  .chars-cont,
+  .characters-c {
+    width: 92%;
+  }
 }
