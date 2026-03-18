@@ -45,25 +45,53 @@
     <hr style="width: 80%; margin: 40px auto;" />
 
     <!-- TEXT SECTION -->
-    <div style="max-width: 800px; margin: 0 auto; padding: 0 20px; line-height: 1.6;">
-
+    <div
+      style="
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+        line-height: 1.6;
+      "
+    >
       <h3 style="border-bottom: 1px solid black; padding-bottom: 5px;">
-        Weakness - The model is useful for showing how the differences in gold affect the execution of building the same board. 
-        But, it relies on strong simplifying assumptions, which limits its direct applicabilition to TFT gameplay sadly.
+        Weakness - The model is useful for showing how the differences in gold
+        affect the execution of building the same board. But, it relies on
+        strong simplifying assumptions, which limits its direct applicability to
+        TFT gameplay sadly.
       </h3>
 
       <ol>
-        <li>Does not account for RNG/Timing (so basically a poor player can high roll or just get better items and beat the rich player)</li>
+        <li>
+          Does not account for RNG/Timing (so basically a poor player can high
+          roll or just get better items and beat the rich player)
+        </li>
 
-        <li>Assumes that players behave all identically (Beta, r, u(s) = log(s)) (which is not true since some players roll early and snowball while others like to save and spend later)</li>
+        <li>
+          Assumes that players behave all identically (Beta, r, u(s) = log(s))
+          (which is not true since some players roll early and snowball while
+          others like to save and spend later)
+        </li>
 
-        <li>Does not account for Game Theory (no player reaction towards each other like pivots, tempo, denying units, contesting strategically)</li>
+        <li>
+          Does not account for Game Theory (no player reaction towards each
+          other like pivots, tempo, denying units, contesting strategically)
+        </li>
 
-        <li>Treats boards like fixed cost strategies rather than viewing them as flexible</li>
+        <li>
+          Treats boards like fixed cost strategies rather than viewing them as
+          flexible
+        </li>
 
-        <li>Assumes (R) will always have better board (even if Sr &gt; Sp, reason (1) can happen — just because R spends more doesn't mean P can't play the same board)</li>
+        <li>
+          Assumes (R) will always have better board (even if Sr &gt; Sp, reason
+          (1) can happen — just because R spends more doesn't mean P can't play
+          the same board)
+        </li>
 
-        <li>Assumes smooth growth and gradual spending (players are not maximizing intertemporal utility — they are playing for placement spikes)</li>
+        <li>
+          Assumes smooth growth and gradual spending (players are not maximizing
+          intertemporal utility — they are playing for placement spikes)
+        </li>
       </ol>
 
       <p>
@@ -82,18 +110,26 @@
           alt="TFT CRAA Support"
           style="max-width: 100%; height: auto; border: 1px solid black;"
         />
-
-        <ol>
-        <li>“Generate as much gold as possible” -> Supports (Wr > Wp -> Sr > Sp) </li>
-
-        <li>"Spend efficiently" -> *reroll at optimal levels* -> Hints at (Structured spending path) </li>
-
-        <li>“You can’t take your gold with you” -> Supports lifetime resource constraint could also be used for dumping gold though</li>
-
-      </ol>
-        
       </div>
 
+      <div style="text-align: left; margin-top: 20px;">
+        <ol style="padding-left: 25px; line-height: 1.8;">
+          <li>
+            “Generate as much gold as possible” -> Supports (Wr &gt; Wp -> Sr
+            &gt; Sp)
+          </li>
+
+          <li>
+            "Spend efficiently" -> reroll at optimal levels -> Hints at
+            (Structured spending path)
+          </li>
+
+          <li>
+            “You can’t take your gold with you” -> Supports lifetime resource
+            constraint, though it could also be used for dumping gold
+          </li>
+        </ol>
+      </div>
     </div>
 
     <!-- BACK LINK -->
