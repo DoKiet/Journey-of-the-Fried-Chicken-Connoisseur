@@ -4,23 +4,40 @@
 <title>Enter</title>
 
 <style>
-body{
+html, body{
   margin:0;
-  height:100vh;
-  background:url("images/Background_.png") center/contain no-repeat;
+  height:100%;
   background-color:black;
   overflow:hidden;
 }
 
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* locked to the artwork's 16:9 aspect ratio so child positions always
+   track the image, no matter the screen size/shape */
+.stage{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  max-width:calc(100vh * 16 / 9);
+  max-height:calc(100vw * 9 / 16);
+
+  background:url("images/Background_.png") center/100% 100% no-repeat;
+}
+
 .splash{
-  width:260px;        /* smaller */
-  height:340px;
+  width:13.54%;        /* 260/1920 of the artwork */
+  height:31.48%;       /* 340/1080 of the artwork */
 
   background:url("images/Splash_Not_Burp.png") center/contain no-repeat;
 
   position:absolute;
   left:48%;
-  top:42%;            /* moved up */
+  top:46.3%;          /* stands on the floor line */
 
   transform:translate(-50%,-50%);
   display:block;
@@ -35,7 +52,9 @@ body{
 
 <body>
 
-<a href="home.html" class="splash"></a>
+<div class="stage">
+  <a href="home.html" class="splash"></a>
+</div>
 
 </body>
 </html>
