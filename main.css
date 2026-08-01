@@ -352,6 +352,12 @@ hr {
   align-items: center;
 }
 
+.characters-c h3 {
+  font-weight: normal;
+  text-align: center;
+  line-height: 1.45;
+}
+
 .chars-cont {
   width: 80%;
   display: flex;
