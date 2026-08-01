@@ -414,9 +414,25 @@ hr {
   align-items: flex-start;
 }
 
-.char-data h4 {
+.char-data .char-text {
   flex: 1 1 300px;
   min-width: 0;
+}
+
+.char-data h4 {
+  font-weight: normal;
+}
+
+.characters-c h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.char-quote {
+  font-style: italic;
+  margin: 0 0 14px 0;
+  padding-left: 14px;
+  border-left: 3px solid black;
 }
 
 .char-portrait-wrap {
