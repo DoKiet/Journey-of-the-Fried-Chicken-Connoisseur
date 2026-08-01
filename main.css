@@ -90,6 +90,28 @@ hr {
 }
 
 /* =========================
+   NAV ICON SPRITE
+   (one image request instead of 8, shared across every page)
+========================= */
+.nav-icon {
+  display: inline-block;
+  height: 56px;
+  width: 99.408px;
+  background-image: url("images/nav-sprite.png");
+  background-size: 795.26px 56px;
+  background-repeat: no-repeat;
+}
+
+.nav-icon-home { background-position: 0 0; }
+.nav-icon-archives { background-position: -99.408px 0; }
+.nav-icon-writing { background-position: -198.816px 0; }
+.nav-icon-contact { background-position: -298.224px 0; }
+.nav-icon-characters { background-position: -397.632px 0; }
+.nav-icon-enemies { background-position: -497.04px 0; }
+.nav-icon-photos { background-position: -596.448px 0; }
+.nav-icon-games { background-position: -695.856px 0; }
+
+/* =========================
    GENERAL LAYOUT
 ========================= */
 .container {
@@ -479,6 +501,21 @@ hr {
   .nav img {
     height: 42px;
   }
+
+  .nav-icon {
+    height: 42px;
+    width: 74.556px;
+    background-size: 596.448px 42px;
+  }
+
+  .nav-icon-home { background-position: 0 0; }
+  .nav-icon-archives { background-position: -74.556px 0; }
+  .nav-icon-writing { background-position: -149.112px 0; }
+  .nav-icon-contact { background-position: -223.668px 0; }
+  .nav-icon-characters { background-position: -298.224px 0; }
+  .nav-icon-enemies { background-position: -372.78px 0; }
+  .nav-icon-photos { background-position: -447.336px 0; }
+  .nav-icon-games { background-position: -521.892px 0; }
 
   .nav > div {
     gap: 12px;
