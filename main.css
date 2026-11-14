@@ -32,8 +32,8 @@ hr {
 /* =========================
    MARGIN DOODLES
    Wide screens: dancing in the side margins.
-   Narrower screens (laptops without room, tablets, phones):
-   both dance together at the bottom of the page.
+   Smaller laptops and tablets: both dance together at the bottom
+   of the page. Phones: hidden.
 ========================= */
 body::after {
   content: "";
@@ -46,6 +46,13 @@ body::after {
   background-position: 15% center, 85% center;
   background-repeat: no-repeat;
   pointer-events: none;
+}
+
+/* Phones: no doodles, so the text gets the whole screen */
+@media (max-width: 700px) {
+  body::after {
+    display: none;
+  }
 }
 
 @media (min-width: 1280px) {
