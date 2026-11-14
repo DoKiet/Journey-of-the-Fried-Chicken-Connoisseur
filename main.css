@@ -292,15 +292,14 @@ body::after {
 
 .slider-track {
   display: flex;
+  align-items: flex-start;
 }
 
 .archive-file-container .slider-slide {
   flex: 0 0 100%;
   width: 100%;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: contain;
-  background: white;
   margin: 0;
 }
 
