@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CAC2 Counting Strategy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../main.css" />
+    <script src="../bionic.js" defer></script>
+    <style>
+      .cac2 { max-width: 900px; margin: 0 auto; padding: 0 16px; line-height: 1.6; }
+      .cac2 h3 { border-bottom: 1px solid black; padding-bottom: 5px; margin-top: 40px; }
+      .table-scroll { overflow-x: auto; margin: 16px 0; }
+      .cac2 table { border-collapse: collapse; margin: 0 auto; font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+      .cac2 caption { font-family: Georgia, "Times New Roman", serif; font-weight: bold; padding: 6px; }
+      .cac2 th, .cac2 td { border: 1px solid #d0d0d0; text-align: center; }
+
+      /* Tag values */
+      .tags th { background: #4caf50; color: black; padding: 10px 14px; min-width: 32px; }
+      .tags td { background: #ffff59; padding: 10px 14px; }
+
+      /* Index + basic strategy charts */
+      .bj-table th, .bj-table td { width: 40px; height: 24px; padding: 0 2px; font-size: 14px; }
+      .bj-table caption { background: #2b2b2b; color: white; font-family: Arial, Helvetica, sans-serif; }
+      .bj-table tr.sec th { background: #2f6fbf; color: white; text-transform: uppercase; height: 22px; }
+      .bj-table tr.up th, .bj-table tr > th:first-child { background: #2f6fbf; color: white; }
+      .c-hit { background: #4caf50; }
+      .c-stand { background: #e8392b; }
+      .c-dbl { background: #0d1b52; color: white; }
+      .c-split { background: #4daae8; }
+      .c-das { background: repeating-linear-gradient(45deg, #4daae8 0 6px, #b5dcf6 6px 12px); }
+      .c-nosplit { background: #f2f2f2; color: #777; }
+      .c-sur { background: #ffff59; }
+      .c-blank { background: white; }
+      .c-idx { background: #ffff59; color: black; }
+      .bs td { font-size: 13px; }
+
+      .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: center; font-size: 15px; margin: 10px 0; }
+      .legend span.sw { display: inline-block; width: 26px; height: 16px; vertical-align: middle; margin-right: 6px; border: 1px solid #999; text-align: center; font: bold 12px Arial, sans-serif; line-height: 16px; }
+
+      /* Rule switcher */
+      .rule-switch { text-align: center; margin: 12px 0; }
+      .rule-switch button { font: bold 15px Georgia, serif; padding: 6px 18px; border: 1px solid black; background: white; cursor: pointer; }
+      .rule-switch button[aria-pressed="true"] { background: black; color: white; }
+      body.show-S17 .rule-H17, body.show-H17 .rule-S17 { display: none; }
+
+      /* Risk averse summary */
+      .ra-sum th, .ra-sum td { padding: 4px 10px; font-size: 15px; }
+      .ra-sum tr.hd th { background: #9ad44a; text-transform: uppercase; }
+      .ra-sum tr.hd th.deck { background: #2b2b2b; color: white; }
+      .ra-sum th.grp { background: #9ad44a; text-transform: uppercase; }
+      .ra-sum th.play { background: #3a5f96; color: white; }
+      .ra-sum td { background: #7ffcff; min-width: 40px; }
+      .ra-sum tr.fab th { background: #9ad44a; text-transform: uppercase; }
+
+      .fallback-img { max-width: 100%; height: auto; border: 1px solid black; }
+      details { margin: 12px 0; }
+      summary { cursor: pointer; }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div class="nav-cont">
+      <nav class="nav">
+        <div>
+          <a href="../home.html"><span class="nav-icon nav-icon-home" aria-label="Home"></span></a>
+          <a href="../archives.html"><span class="nav-icon nav-icon-archives" aria-label="Archives"></span></a>
+          <a href="../writing.html"><span class="nav-icon nav-icon-writing" aria-label="Writing"></span></a>
+          <a href="../contact.html"><span class="nav-icon nav-icon-contact" aria-label="Contact"></span></a>
+          <a href="../gallery.html"><span class="nav-icon nav-icon-characters" aria-label="Characters"></span></a>
+          <a href="../enemies.html"><span class="nav-icon nav-icon-enemies" aria-label="Enemies"></span></a>
+          <a href="../photos.html"><span class="nav-icon nav-icon-photos" aria-label="Photos"></span></a>
+          <a href="../game.html"><span class="nav-icon nav-icon-games" aria-label="Games"></span></a>
+        </div>
+      </nav>
+    </div>
+
+    <hr color="#000000" width="100%" />
+
+    <!-- TITLE -->
+    <h1 style="text-align: center; margin-top: 20px;">CAC2 Counting Strategy</h1>
+
+    <div class="cac2">
+      <p>
+        CAC2 is a balanced, level-2 blackjack count. Every card that leaves the
+        shoe adds its tag value to the running count. Divide the running count
+        by the decks left to get the true count (TC), then use the index charts
+        below to know when to deviate from basic strategy.
+      </p>
+
+      <h3>Tag Values</h3>
+      <div class="table-scroll">
+<table class="tags"><caption>CAC2 tag values</caption><tr><th>A</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th></tr><tr><td>-1</td><td>+1</td><td>+2</td><td>+2</td><td>+2</td><td>+1</td><td>+1</td><td>0</td><td>0</td><td>-2</td></tr></table>
+      </div>
+
+      <h3>2-Deck Index Charts (Risk Averse)</h3>
+      <p>
+        Colored cells are the default play. A yellow cell with a number X means
+        stand, double, split, surrender or take insurance when TC &ge; X.
+        An &ldquo;r&rdquo; (Xr) means surrender when TC &lt; X.
+      </p>
+      <div class="legend">
+        <span><span class="sw c-hit"></span>Hit</span>
+        <span><span class="sw c-stand"></span>Stand</span>
+        <span><span class="sw c-dbl"></span>Double</span>
+        <span><span class="sw c-split"></span>Split</span>
+        <span><span class="sw c-idx">X</span>Deviate if TC &ge; X</span>
+        <span><span class="sw c-idx">Xr</span>Surrender if TC &lt; X</span>
+      </div>
+      <div class="rule-switch" hidden>
+        Dealer rule:
+        <button type="button" data-rule="S17" aria-pressed="true">S17</button>
+        <button type="button" data-rule="H17" aria-pressed="false">H17</button>
+      </div>
+      <div class="table-scroll rule-S17">
+<table class="bj-table"><caption>2 Decks S17 (RA Indices) &middot; Insurance at TC &ge; 4</caption>
+<tr class="sec"><th colspan="11">Hard hit/stand</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>12</th><td class="c-idx">6</td><td class="c-idx">4</td><td class="c-idx">1</td><td class="c-idx">-2</td><td class="c-idx">-1</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>13</th><td class="c-idx">-1</td><td class="c-idx">-2</td><td class="c-idx">-4</td><td class="c-idx">-7</td><td class="c-idx">-7</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>14</th><td class="c-idx">-5</td><td class="c-idx">-7</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">23</td><td class="c-hit" title="Hit"></td><td class="c-idx">17</td><td class="c-idx">6</td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">7</td><td class="c-idx">0</td><td class="c-idx">13</td></tr>
+<tr><th>17</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Soft hit/stand</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>S17</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>S18</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">-1</td></tr>
+<tr><th>S19</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Hard double down</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>7</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>8</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-idx">8</td><td class="c-idx">5</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>9</th><td class="c-idx">2</td><td class="c-idx">-1</td><td class="c-idx">-4</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">9</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>10</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">-3</td><td class="c-idx">12</td><td class="c-idx">7</td></tr>
+<tr><th>11</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">-7</td><td class="c-idx">1</td></tr>
+<tr class="sec"><th colspan="11">Soft double down</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A2</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">7</td><td class="c-idx">-1</td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A3</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">5</td><td class="c-idx">-4</td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A4</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">0</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A5</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A6</th><td class="c-hit" title="Hit"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A7</th><td class="c-idx">3</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A8</th><td class="c-stand" title="Stand"></td><td class="c-idx">10</td><td class="c-idx">6</td><td class="c-idx">3</td><td class="c-idx">1</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>A9</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">13</td><td class="c-idx">11</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Split, no DAS</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>22</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>33</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>44</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>55</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>66</th><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr><th>99</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-idx">10</td></tr>
+<tr><th>TT</th><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">10</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>AA</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr class="sec"><th colspan="11">Split with DAS</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>22</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>33</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>44</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>55</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>66</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr><th>99</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-idx">6</td></tr>
+<tr><th>TT</th><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">10</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>AA</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr class="sec"><th colspan="11">Late surrender</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>17</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">-8r</td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-idx">8</td><td class="c-idx">1</td><td class="c-idx">-4</td><td class="c-idx">-3</td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-idx">4</td><td class="c-idx">-1</td><td class="c-idx">2</td></tr>
+<tr><th>14</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">11</td><td class="c-idx">5</td><td class="c-idx">9</td></tr>
+<tr><th>13</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-idx">3</td><td class="c-split" title="Split"></td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-idx">8</td><td class="c-idx">2</td><td class="c-idx">6</td></tr>
+</table>
+      </div>
+      <div class="table-scroll rule-H17">
+<table class="bj-table"><caption>2 Decks H17 (RA Indices) &middot; Insurance at TC &ge; 4</caption>
+<tr class="sec"><th colspan="11">Hard hit/stand</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>12</th><td class="c-idx">6</td><td class="c-idx">3</td><td class="c-idx">1</td><td class="c-idx">-2</td><td class="c-idx">-5</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>13</th><td class="c-idx">-1</td><td class="c-idx">-3</td><td class="c-idx">-5</td><td class="c-idx">-8</td><td class="c-idx">-12</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>14</th><td class="c-idx">-6</td><td class="c-idx">-8</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">23</td><td class="c-hit" title="Hit"></td><td class="c-idx">17</td><td class="c-idx">6</td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">7</td><td class="c-idx">0</td><td class="c-idx">5</td></tr>
+<tr><th>17</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Soft hit/stand</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>S17</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>S18</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">17</td></tr>
+<tr><th>S19</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Hard double down</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>7</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>8</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-idx">8</td><td class="c-idx">5</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>9</th><td class="c-idx">2</td><td class="c-idx">-1</td><td class="c-idx">-4</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">9</td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>10</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">-3</td><td class="c-idx">12</td><td class="c-idx">5</td></tr>
+<tr><th>11</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-idx">-7</td><td class="c-idx">-2</td></tr>
+<tr class="sec"><th colspan="11">Soft double down</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A2</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">7</td><td class="c-idx">-1</td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A3</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">4</td><td class="c-idx">-4</td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A4</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">0</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A5</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A6</th><td class="c-hit" title="Hit"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A7</th><td class="c-idx">1</td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>A8</th><td class="c-stand" title="Stand"></td><td class="c-idx">10</td><td class="c-idx">6</td><td class="c-idx">3</td><td class="c-idx">-1</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>A9</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">13</td><td class="c-idx">11</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr class="sec"><th colspan="11">Split, no DAS</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>22</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>33</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>44</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>55</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>66</th><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr><th>99</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-idx">7</td></tr>
+<tr><th>TT</th><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">10</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>AA</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr class="sec"><th colspan="11">Split with DAS</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>22</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>33</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>44</th><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>55</th><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-dbl" title="Double"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>66</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr><th>99</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-stand" title="Stand"></td><td class="c-idx">2</td></tr>
+<tr><th>TT</th><td class="c-stand" title="Stand"></td><td class="c-idx">17</td><td class="c-idx">13</td><td class="c-idx">10</td><td class="c-idx">9</td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td></tr>
+<tr><th>AA</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td></tr>
+<tr class="sec"><th colspan="11">Late surrender</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>17</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-idx">1r</td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-idx">8</td><td class="c-idx">1</td><td class="c-idx">-4</td><td class="c-idx">-8</td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-idx">4</td><td class="c-idx">-1</td><td class="c-idx">-3</td></tr>
+<tr><th>14</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">11</td><td class="c-idx">5</td><td class="c-idx">6</td></tr>
+<tr><th>13</th><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-stand" title="Stand"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-hit" title="Hit"></td><td class="c-idx">13</td><td class="c-hit" title="Hit"></td></tr>
+<tr><th>88</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-idx">3</td><td class="c-idx">-1r</td></tr>
+<tr><th>77</th><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-split" title="Split"></td><td class="c-hit" title="Hit"></td><td class="c-idx">8</td><td class="c-idx">2</td><td class="c-idx">2</td></tr>
+</table>
+      </div>
+
+      <h3>Risk Averse Summary (6D and 2D)</h3>
+      <p>The most important deviations side by side, including the Fab 4 surrender plays.</p>
+      <div class="table-scroll">
+<table class="ra-sum"><caption>Risk Averse index summary &middot; 6 decks and 2 decks</caption>
+<tr class="hd"><th rowspan="2" colspan="2"></th><th rowspan="2" class="deck">6D</th><th colspan="2">Risk Averse</th><th rowspan="2" class="deck">2D</th><th colspan="2">Risk Averse</th></tr>
+<tr class="hd"><th>S17</th><th>H17</th><th>S17</th><th>H17</th></tr>
+<tr><th class="grp" colspan="2" rowspan="1">INS</th><th class="play">INS</th><td>5</td><td>5</td><th class="play">INS</th><td>4</td><td>4</td></tr>
+<tr><th class="grp" colspan="2" rowspan="10">Standing</th><th class="play">15vT</th><td>7</td><td>7</td><th class="play">15vT</th><td>6</td><td>6</td></tr>
+<tr><th class="play">16vT</th><td>0</td><td>0</td><th class="play">16vT</th><td>0</td><td>0</td></tr>
+<tr><th class="play">16v9</th><td>7</td><td>7</td><th class="play">16v9</th><td>7</td><td>7</td></tr>
+<tr><th class="play">12v6</th><td>-2</td><td>-6</td><th class="play">12v6</th><td>-1</td><td>-5</td></tr>
+<tr><th class="play">12v5</th><td>-2</td><td>-3</td><th class="play">12v5</th><td>-2</td><td>-2</td></tr>
+<tr><th class="play">12v4</th><td>0</td><td>0</td><th class="play">12v4</th><td>1</td><td>1</td></tr>
+<tr><th class="play">12v3</th><td>3</td><td>2</td><th class="play">12v3</th><td>4</td><td>3</td></tr>
+<tr><th class="play">13v3</th><td>-3</td><td>-4</td><th class="play">13v3</th><td>-2</td><td>-3</td></tr>
+<tr><th class="play">12v2</th><td>5</td><td>5</td><th class="play">12v2</th><td>6</td><td>6</td></tr>
+<tr><th class="play">13v2</th><td>-1</td><td>-2</td><th class="play">13v2</th><td>-1</td><td>-1</td></tr>
+<tr><th class="grp" colspan="2" rowspan="8">Doubling</th><th class="play">10vA</th><td>8</td><td>6</td><th class="play">10vA</th><td>7</td><td>5</td></tr>
+<tr><th class="play">11vA</th><td>2</td><td>-1</td><th class="play">11vA</th><td>1</td><td>-2</td></tr>
+<tr><th class="play">9v7</th><td>9</td><td>9</td><th class="play">9v7</th><td>9</td><td>9</td></tr>
+<tr><th class="play">8v6</th><td>4</td><td>4</td><th class="play">8v6</th><td>5</td><td>5</td></tr>
+<tr><th class="play">8v5</th><td>9</td><td>9</td><th class="play">8v5</th><td>8</td><td>8</td></tr>
+<tr><th class="play">9v2</th><td>2</td><td>2</td><th class="play">9v2</th><td>2</td><td>2</td></tr>
+<tr><th class="play">A8v6</th><td>1</td><td>-1</td><th class="play">A8v6</th><td>1</td><td>-1</td></tr>
+<tr><th class="play">A8v5</th><td>3</td><td>3</td><th class="play">A8v5</th><td>3</td><td>3</td></tr>
+<tr><th class="grp" rowspan="6">Splitting</th><th class="grp sub" rowspan="3">NDAS</th><th class="play">TTv6</th><td>9</td><td>8</td><th class="play">TTv6</th><td>9</td><td>9</td></tr>
+<tr><th class="play">TTv5</th><td>10</td><td>10</td><th class="play">TTv5</th><td>10</td><td>10</td></tr>
+<tr><th class="play">TTv4</th><td>13</td><td>13</td><th class="play">TTv4</th><td>13</td><td>13</td></tr>
+<tr><th class="grp sub" rowspan="3">DAS</th><th class="play">TTv6</th><td>9</td><td>8</td><th class="play">TTv6</th><td>9</td><td>9</td></tr>
+<tr><th class="play">TTv5</th><td>10</td><td>10</td><th class="play">TTv5</th><td>10</td><td>10</td></tr>
+<tr><th class="play">TTv4</th><td>13</td><td>13</td><th class="play">TTv4</th><td>13</td><td>13</td></tr>
+<tr class="fab"><th colspan="8">Fab 4 (late surrender indices)</th></tr>
+<tr><th class="grp" colspan="2" rowspan="4">Late surrender (LS)</th><th class="play">15vA</th><td>3</td><td>-2</td><th class="play">15vA</th><td>2</td><td>-3</td></tr>
+<tr><th class="play">14vT</th><td>5</td><td>5</td><th class="play">14vT</th><td>5</td><td>5</td></tr>
+<tr><th class="play">15vT</th><td>-1</td><td>-1</td><th class="play">15vT</th><td>-1</td><td>-1</td></tr>
+<tr><th class="play">15v9</th><td>4</td><td>4</td><th class="play">15v9</th><td>4</td><td>4</td></tr>
+</table>
+      </div>
+
+      <h3>Basic Strategy</h3>
+      <p>
+        Learn this first. With perfect basic strategy the house edge drops to
+        about 0.5%, which is what makes counting worth it.
+      </p>
+      <div class="legend">
+        <span><span class="sw c-hit">H</span>Hit</span>
+        <span><span class="sw c-stand">S</span>Stand</span>
+        <span><span class="sw c-dbl">D</span>Double if allowed, otherwise hit</span>
+        <span><span class="sw c-dbl">Ds</span>Double if allowed, otherwise stand</span>
+        <span><span class="sw c-split">Y</span>Split</span>
+        <span><span class="sw c-das">Y/N</span>Split only if DAS is offered</span>
+        <span><span class="sw c-nosplit">N</span>Don&rsquo;t split</span>
+        <span><span class="sw c-sur">SUR</span>Surrender</span>
+      </div>
+      <div class="rule-switch" hidden>
+        Dealer rule:
+        <button type="button" data-rule="S17" aria-pressed="true">S17</button>
+        <button type="button" data-rule="H17" aria-pressed="false">H17</button>
+      </div>
+      <div class="table-scroll rule-S17">
+<table class="bj-table bs"><caption>S17 Basic Strategy &middot; Insurance / even money: don&rsquo;t take</caption>
+<tr class="sec"><th colspan="11">Pair splitting</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A,A</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td></tr>
+<tr><th>T,T</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>9,9</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>8,8</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td></tr>
+<tr><th>7,7</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>6,6</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>5,5</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>4,4</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>3,3</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>2,2</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr class="sec"><th colspan="11">Soft totals</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A,9</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>A,8</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>A,7</th><td class="c-stand" title="Stand">S</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,6</th><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,5</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,4</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,3</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,2</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr class="sec"><th colspan="11">Hard totals</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>17</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>14</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>13</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>12</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>11</th><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>10</th><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>9</th><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>8</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr class="sec"><th colspan="11">Late surrender</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>16</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td><td class="c-sur" title="Surrender">SUR</td><td class="c-sur" title="Surrender">SUR</td></tr>
+<tr><th>15</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td><td class="c-blank" title=""></td></tr>
+<tr><th>14</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td></tr>
+</table>
+      </div>
+      <div class="table-scroll rule-H17">
+<table class="bj-table bs"><caption>H17 Basic Strategy &middot; Insurance / even money: don&rsquo;t take</caption>
+<tr class="sec"><th colspan="11">Pair splitting</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A,A</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td></tr>
+<tr><th>T,T</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>9,9</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>8,8</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td></tr>
+<tr><th>7,7</th><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>6,6</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>5,5</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>4,4</th><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>3,3</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr><th>2,2</th><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-das" title="Split only if DAS is offered">Y/N</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-split" title="Split">Y</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td><td class="c-nosplit" title="Don't split">N</td></tr>
+<tr class="sec"><th colspan="11">Soft totals</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>A,9</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>A,8</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>A,7</th><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-dbl" title="Double, otherwise stand">Ds</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,6</th><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,5</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,4</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,3</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>A,2</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr class="sec"><th colspan="11">Hard totals</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>17</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td></tr>
+<tr><th>16</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>15</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>14</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>13</th><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>12</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-stand" title="Stand">S</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>11</th><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td></tr>
+<tr><th>10</th><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>9</th><td class="c-hit" title="Hit">H</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-dbl" title="Double">D</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr><th>8</th><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td><td class="c-hit" title="Hit">H</td></tr>
+<tr class="sec"><th colspan="11">Late surrender</th></tr>
+<tr class="up"><th></th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>T</th><th>A</th></tr>
+<tr><th>17</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td></tr>
+<tr><th>16</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td><td class="c-sur" title="Surrender">SUR</td><td class="c-sur" title="Surrender">SUR</td></tr>
+<tr><th>15</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td><td class="c-sur" title="Surrender">SUR</td></tr>
+<tr><th>8,8</th><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-blank" title=""></td><td class="c-sur" title="Surrender">SUR</td></tr>
+</table>
+      </div>
+      <p style="text-align: center;">
+        Original PDFs:
+        <a href="S17-Basic-Strategy.pdf" target="_blank">S17 Basic Strategy</a> &middot;
+        <a href="H17-Basic-Strategy.pdf" target="_blank">H17 Basic Strategy</a>
+        (from Blackjack Apprenticeship)
+      </p>
+
+      <details>
+        <summary>Original chart images</summary>
+        <p><img class="fallback-img" src="CAC2_Tag_Values.png" alt="CAC2 tag values chart" /></p>
+        <p><img class="fallback-img" src="CAC2_2D_RA_Indices.png" alt="2 deck S17 and H17 RA index charts" /></p>
+        <p><img class="fallback-img" src="CAC2_Risk_Averse_Summary.png" alt="Risk averse index summary for 6 and 2 decks" /></p>
+      </details>
+    </div>
+
+    <!-- BACK LINK -->
+    <div style="text-align: center; margin: 20px 0;">
+      <a href="../game.html">← Back to Game Page</a>
+    </div>
+
+    <script>
+      (function () {
+        var switches = document.querySelectorAll(".rule-switch");
+        function setRule(rule) {
+          document.body.classList.remove("show-S17", "show-H17");
+          document.body.classList.add("show-" + rule);
+          document.querySelectorAll(".rule-switch button").forEach(function (b) {
+            b.setAttribute("aria-pressed", b.getAttribute("data-rule") === rule ? "true" : "false");
+          });
+        }
+        switches.forEach(function (s) {
+          s.hidden = false;
+          s.addEventListener("click", function (e) {
+            var rule = e.target.getAttribute && e.target.getAttribute("data-rule");
+            if (rule) setRule(rule);
+          });
+        });
+        setRule("S17");
+      })();
+    </script>
+  </body>
+</html>
