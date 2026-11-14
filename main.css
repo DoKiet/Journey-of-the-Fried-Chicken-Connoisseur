@@ -278,6 +278,70 @@ body::after {
   margin: 0 auto;
 }
 
+/* Photo slider (archive posts) */
+.slider {
+  width: 100%;
+  max-width: 480px;
+  margin: 24px auto;
+  outline: none;
+}
+
+.slider-window {
+  overflow: hidden;
+  border: 1px solid black;
+  box-shadow: 4px 4px 0 black;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.archive-file-container .slider-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 6 / 7;
+  object-fit: cover;
+  margin: 0;
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.slider-btn {
+  padding: 8px 18px;
+  border: 1px solid black;
+  background: white;
+  color: black;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 black;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.slider-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 black;
+}
+
+.slider-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 black;
+}
+
+.slider-count {
+  min-width: 3em;
+  text-align: center;
+}
+
 .writing-file-container {
   display: flex;
   flex-direction: column;
