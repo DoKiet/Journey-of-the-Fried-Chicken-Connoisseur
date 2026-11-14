@@ -281,15 +281,13 @@ body::after {
 /* Photo slider (archive posts) */
 .slider {
   width: 100%;
-  max-width: 480px;
-  margin: 24px auto;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
   outline: none;
 }
 
 .slider-window {
   overflow: hidden;
-  border: 1px solid black;
-  box-shadow: 4px 4px 0 black;
 }
 
 .slider-track {
@@ -301,8 +299,9 @@ body::after {
   flex: 0 0 100%;
   width: 100%;
   height: auto;
-  aspect-ratio: 6 / 7;
-  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: white;
   margin: 0;
 }
 
