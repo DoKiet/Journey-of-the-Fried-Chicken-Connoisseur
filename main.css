@@ -292,7 +292,6 @@ body::after {
 
 .slider-track {
   display: flex;
-  transition: transform 0.4s ease;
 }
 
 .archive-file-container .slider-slide {
@@ -320,20 +319,7 @@ body::after {
   color: black;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.1rem;
-  border-radius: 6px;
   cursor: pointer;
-  box-shadow: 2px 2px 0 black;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.slider-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 3px 3px 0 black;
-}
-
-.slider-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0 0 0 black;
 }
 
 .slider-count {
