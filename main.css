@@ -30,17 +30,39 @@ hr {
 }
 
 /* =========================
-   MARGIN DOODLES (wide screens only)
+   MARGIN DOODLES
+   Wide screens: dancing in the side margins.
+   Narrower screens (laptops without room, tablets, phones):
+   both dance together at the bottom of the page.
 ========================= */
-@media (min-width: 1700px) {
+body::after {
+  content: "";
+  display: block;
+  height: 220px;
+  margin: 10px auto 70px auto; /* room for the Bionic button */
+  max-width: 520px;
+  background-image: url("images/Me_Dancing.png"), url("images/Gregor_Dancing.png");
+  background-size: auto 100%, auto 100%;
+  background-position: 15% center, 85% center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+@media (min-width: 1280px) {
   body::before,
   body::after {
     content: "";
+    display: block;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 240px;
-    height: 640px;
+    /* fill the empty margin beside the ~900px content, up to 240px */
+    width: clamp(150px, calc((100vw - 900px) / 2 - 40px), 240px);
+    height: auto;
+    max-height: 90vh;
+    aspect-ratio: 3 / 8;
+    margin: 0;
+    max-width: none;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -162,6 +184,7 @@ hr {
 }
 
 .main {
+  width: 100%;
   max-width: 800px;
   margin: 20px auto;
 }
@@ -316,6 +339,7 @@ hr {
 .enemies-cont,
 .photos-cont {
   width: 100%;
+  overflow-wrap: anywhere;
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px 40px 20px;
