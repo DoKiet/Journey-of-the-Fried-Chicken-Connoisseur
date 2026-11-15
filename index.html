@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>Enter</title>
+<link rel="preload" as="image" href="images/Background_.webp">
+<link rel="preload" as="image" href="images/Splash_Not_Burp.webp">
+<link rel="prefetch" href="images/Splash_Burp.webp">
 
 <style>
 html, body{
@@ -26,14 +29,14 @@ body{
   max-width:calc(100vh * 16 / 9);
   max-height:calc(100vw * 9 / 16);
 
-  background:url("images/Background_.png") center/100% 100% no-repeat;
+  background:url("images/Background_.webp") center/100% 100% no-repeat;
 }
 
 .splash{
   width:13.54%;        /* 260/1920 of the artwork */
   height:31.48%;       /* 340/1080 of the artwork */
 
-  background:url("images/Splash_Not_Burp.png") center/contain no-repeat;
+  background:url("images/Splash_Not_Burp.webp") center/contain no-repeat;
 
   position:absolute;
   left:48%;
@@ -44,7 +47,7 @@ body{
 }
 
 .splash:hover{
-  background:url("images/Splash_Burp.png") center/contain no-repeat;
+  background:url("images/Splash_Burp.webp") center/contain no-repeat;
 }
 </style>
 
