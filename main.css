@@ -41,7 +41,7 @@ body::after {
   height: 220px;
   margin: 10px auto 70px auto; /* room for the Bionic button */
   max-width: 520px;
-  background-image: url("images/Me_Dancing.png"), url("images/Gregor_Dancing.png");
+  background-image: url("images/Me_Dancing.webp"), url("images/Gregor_Dancing.webp");
   background-size: auto 100%, auto 100%;
   background-position: 15% center, 85% center;
   background-repeat: no-repeat;
@@ -79,12 +79,12 @@ body::after {
 
   body::before {
     left: 20px;
-    background-image: url("images/Me_Dancing.png");
+    background-image: url("images/Me_Dancing.webp");
   }
 
   body::after {
     right: 20px;
-    background-image: url("images/Gregor_Dancing.png");
+    background-image: url("images/Gregor_Dancing.webp");
   }
 }
 
@@ -126,7 +126,7 @@ body::after {
   display: inline-block;
   height: 56px;
   width: 99.408px;
-  background-image: url("images/nav-sprite.png");
+  background-image: url("images/nav-sprite.webp");
   background-size: 795.26px 56px;
   background-repeat: no-repeat;
 }
@@ -429,13 +429,6 @@ body::after {
   align-items: center;
 }
 
-.desc {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-}
-
 /* =========================
    CHARACTERS
 ========================= */
@@ -559,12 +552,6 @@ body::after {
   width: 100%;
   max-width: 450px;
   height: auto;
-}
-
-.enemies-portrait {
-  width: 125px;
-  height: 200px;
-  object-fit: cover;
 }
 
 /* =========================
